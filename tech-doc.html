@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OOP Versus Functional Decomposition</title>
+  <!-- <link rel="stylesheet" href="css/reset.css"> -->
+  <link rel="stylesheet" href="css/tech-doc.css">
+</head>
+
+<body>
+  <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+
+  <nav id="navbar">
+    <header>
+      Contents
+    </header>
+    <ul>
+      <li><a href="#introduction" class="nav-link">Introduction</a></li>
+      <li><a href="#the_basic_set-up" class="nav-link">The Basic Set-Up</a></li>
+      <li><a href="#the_functional_approach" class="nav-link">The Functional Approach</a></li>
+      <li><a href="#the_object-oriented_approach" class="nav-link">The Object-Oriented Approach</a></li>
+      <li><a href="#the_punch-line" class="nav-link">The Punch-Line</a></li>
+    </ul>
+  </nav>
+  <main id="main-doc">
+    <h1>OOP Versus Functional Decomposition</h1>
+    <section class="main-section" id="introduction">
+      <header>
+        <h2>Introduction</h2>
+      </header>
+      <p>
+        We can compare procedural (functional) decomposition and object-oriented decomposition using the classic
+        example of implementing operations for a small expression language. In functional programming, we typically
+        break programs down into functions that perform some operation. In OOP, we typically break programs
+        down into classes that give behavior to some kind of data.
+      </p>
+      <p>
+        We show that the two approaches largely lay out the same ideas in exactly opposite ways, and which way
+        is “better” is either a matter of taste or depends on how software might be changed or extended in the
+        future. We then consider how both approaches deal with operations over multiple arguments, which in many
+        object-oriented languages requires a technique called <em>double (multiple) dispatch</em> in order to stick with
+        an object-oriented style.
+      </p>
+    </section>
+    <section class="main-section" id="the_basic_set-up">
+      <header>
+        <h1>The Basic Set-Up</h1>
+      </header>
+      <p>
+        The following problem is the canonical example of a common programming pattern, and, not coincidentally,
+        is a problem we have already considered a couple times in the course. Suppose we have:
+      </p>
+      <ul>
+        <li>
+          Expressions for a small “language” such as for arithmetic
+        </li>
+        <li>
+          Different <em>variants</em> of expressions, such as integer values, negation expressions, and addition
+          expressions
+        </li>
+        <li>
+          Different <em>operations</em> over expressions, such as evaluating them, converting them to strings, or
+          determining if
+          they contain the constant zero in them
+        </li>
+      </ul>
+      <p>
+        This problem leads to a conceptual <em>matrix</em> (two-dimensional grid) with one entry for each combination of
+        variant and operation:
+      </p>
+      <table>
+        <tr>
+          <th>&nbsp;</th>
+          <th>eval</th>
+          <th>toString</th>
+          <th>hasZero</th>
+        </tr>
+        <tr>
+          <td>Int</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td>Add</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td>Negate</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+      </table>
+      <p>
+        No matter what programming language you use or how you approach solving this programming problem,
+        you need to indicate what the proper behavior is for each entry in the grid. Certain approaches or languages
+        might make it easier to specify defaults, but you are still deciding something for every entry.
+      </p>
+    </section>
+    <section class="main-section" id="the_functional_approach">
+      <header>
+        <h2>The Functional Approach</h2>
+      </header>
+      <p>
+        In functional languages, the standard style is to do the following:
+      </p>
+      <ul>
+        <li>
+          Deﬁne a <em>datatype</em> for expressions, with one <em>constructor</em> for each variant. (In a dynamically
+          typed language, we might not give the datatype a name in our program, but we are still thinking in terms of
+          the concept. Similarly, in a language without direct support for constructors, we might use something
+          like lists, but we are still thinking in terms of deﬁning a way to construct each variant of data.)
+        </li>
+        <li>
+          Deﬁne a <em>function</em> for each operation.
+        </li>
+        <li>
+          In each function, have a branch (e.g., via pattern-matching) for each variant of data. If there is a
+          default for many variants, we can use something like a wildcard pattern to avoid enumerating all the
+          branches.
+        </li>
+      </ul>
+      <p>
+        Note this approach is really just procedural decomposition: breaking the problem down into procedures
+        corresponding to each operation.
+      </p>
+      <p>
+        This ML code shows the approach for our example: Notice how we deﬁne all the kinds of data in one place
+        and then the nine entries in the table are implemented “by column” with one function for each column:
+      </p>
+      <pre>
+        <code>
+          exception BadResult of string
+			   
+          datatype exp =
+             Int of int
+             | Negate of exp
+             | Add of exp * exp
+                    
+          fun eval e =
+              case e of
+                  Int _ => e
+                | Negate e1 => (case eval e1 of
+                                    Int i => Int (~i)
+                                  | _ => raise BadResult "non-int in negation")
+                | Add(e1,e2) => (case (eval e1, eval e2) of
+                                    (Int i, Int j) => Int (i+j)
+                                  | _ => raise BadResult "non-ints in addition")
+                  
+          fun toString e =
+              case e of
+                  Int i => Int.toString i
+                | Negate e1 => "-(" ^ (toString e1) ^ ")"
+                | Add(e1,e2) => "(" ^ (toString e1) ^ " + " ^ (toString e2) ^ ")"
+                            
+          fun hasZero e =
+              case e of
+                  Int i => i=0
+                | Negate e1 => hasZero e1
+                | Add(e1,e2) => (hasZero e1) orelse (hasZero e2)
+        </code>
+      </pre>
+    </section>
+    <section class="main-section" id="the_object-oriented_approach">
+      <header>
+        <h2>
+          The Object-Oriented Approach
+        </h2>
+      </header>
+      <p>
+        In object-oriented languages, the standard style is to do the following:
+      </p>
+      <ul>
+        <li>
+          Deﬁne a <em>class</em> for expressions, with one <em>abstract method</em> for each operation. (In a
+          dynamically typed language, we might not actually list the abstract methods in our program, but we are still
+          thinking in terms of the concept. Similarly, in a language with duck typing, we might not actually use a
+          superclass, but we are still thinking in terms of deﬁning what operations we need to support.)
+        </li>
+        <li>
+          Deﬁne a <em>subclass</em> for each variant of data.
+        </li>
+        <li>
+          In each subclass, have a method deﬁnition for each operation. If there is a default for many variants,
+          we can use a method deﬁnition in the superclass so that via inheritance we can avoid enumerating all
+          the branches.
+        </li>
+      </ul>
+      <p>
+        Note this approach is a data-oriented decomposition: breaking the problem down into classes corresponding
+        to each data variant.
+      </p>
+      <p>
+        Here is the Ruby code, which for clarity has the different kinds of expressions subclass the <code>Exp</code>
+        class. In a statically typed language, this would be required and the superclass would have to declare the
+        methods that every subclass of <code>Exp</code> deﬁnes — listing all the operations in one place. Notice how we
+        deﬁne the nine entries in the table “by row” with one class for each row.
+      </p>
+      <pre>
+        <code>
+          class Exp
+          # could put default implementations or helper methods here
+          end
+          
+          class Int < Exp
+            attr_reader :i
+            def initialize i
+              @i = i
+            end
+            def eval
+              self
+            end
+            def toString
+              @i.to_s
+            end
+            def hasZero
+              i==0
+            end
+          end
+          
+          class Negate < Exp
+            attr_reader :e
+            def initialize e
+              @e = e
+            end
+            def eval
+              Int.new(-e.eval.i) # error if e.eval has no i method (not an Int)
+            end
+            def toString
+              "-(" + e.toString + ")"
+            end
+            def hasZero
+              e.hasZero
+            end
+          end
+          
+          class Add < Exp
+            attr_reader :e1, :e2
+            def initialize(e1,e2)
+              @e1 = e1
+              @e2 = e2
+            end
+            def eval
+              Int.new(e1.eval.i + e2.eval.i) # error if e1.eval or e2.eval have no i method
+            end
+            def toString
+              "(" + e1.toString + " + " + e2.toString + ")"
+            end
+            def hasZero
+              e1.hasZero || e2.hasZero
+            end
+        </code>
+      </pre>
+    </section>
+    <section class="main-section" id="the_punch-line">
+      <header>
+        <h2>
+          The Punch-Line
+        </h2>
+      </header>
+      <p>
+        So we have seen that functional decomposition breaks programs down into functions that perform some
+        operation and object-oriented decomposition breaks programs down into classes that give behavior to some
+        kind of data. These are so exactly opposite that they are the same — just deciding whether to lay out our
+        program “by column” or “by row.” Understanding this symmetry is invaluable in conceptualizing software
+        or deciding how to decompose a problem. Moreover, various software tools and IDEs can help you view a
+        program in a different way than the source code is decomposed. For example, a tool for an OOP language
+        that shows you all methods <code>foo</code> that override some superclass’ <code>foo</code> is showing you a
+        column even though the code is organized by rows.
+      </p>
+      <p>
+        So, which is better? It is often a matter of personal preference whether it seems “more natural” to lay out
+        the concepts by row or by column, so you are entitled to your opinion. What opinion is most common can
+        depend on what the software is about. For our expression problem, the functional approach is probably
+        more popular: it is “more natural” to have the cases for <code>eval</code> together rather than the operations
+        for <code>Negate</code> together. For problems like implementing graphical user interfaces, the object-oriented
+        approach is probably more popular: it is “more natural” to have the operations for a kind of data (like a
+        <code>MenuBar</code>) together (such as <code>backgroundColor</code>, <code>height</code>, and
+        <code>doIfMouseIsClicked</code> rather than have the cases for <code>doIfMouseIsClicked</code> together (for
+        <code>MenuBar</code>, <code>TextBox</code>, <code>SliderBar</code>, etc.). The choice can also depend on what
+        programming language you are using, how useful libraries are organized, etc.
+      </p>
+    </section>
+  </main>
+</body>
+
+</html>
