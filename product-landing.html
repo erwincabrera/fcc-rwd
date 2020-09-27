@@ -13,88 +13,87 @@
   <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
 
   <header id="header">
-    <a href="#"><img id="header-img" src="images/product-logo.png" alt="Company Logo"></a>
     <nav id="nav-bar">
-      <ol>
+      <ul class="nav-list capped-width">
+        <li class="logo"><a href="#"><img id="header-img" src="images/iconmonstr-text-27.svg" alt="Company Logo"></a>
+        </li>
         <li><a class="nav-link" href="#features">Features</a></li>
         <li><a class="nav-link" href="#how-it-works">How It Works</a></li>
         <li><a class="nav-link" href="#pricing">Pricing</a></li>
-      </ol>
+      </ul>
     </nav>
   </header>
 
   <main>
-    <div>
-      <h1>Handcrafted, home-made masterpieces</h1>
-      <form id="form" action="https://www.freecodecamp.com/email-submit">
-        <input type="email" id="email" placeholder="Enter your email address" name="email">
-        <input type="submit" id="submit" value="Get Started">
-      </form>
-    </div>
-    <ul id="features">
-      <li>
-        <div class="feature">Premium Materials</div>
-        <div>
-          Our trombones use the shiniest brass which is sourced locally. This will increase the longevity of your
-          purchase.
-        </div>
-      </li>
-      <li>
-        <div class="feature">Fast Shipping</div>
-        <div>
-          We make sure you recieve your trombone as soon as we have finished making it. We also provide free returns if
+    <section class="intro">
+      <div>
+        <h1>Handcrafted, home-made masterpieces</h1>
+        <form id="form" action="https://www.freecodecamp.com/email-submit">
+          <div class="form-item">
+            <input type="email" id="email" placeholder="Enter your email address" name="email">
+            <input type="submit" id="submit" value="Get Started">
+          </div>
+        </form>
+      </div>
+    </section>
+    <section class="features" id="features">
+      <div class="feature">
+        <h2 class="feature-title">Premium Materials</h2>
+        <p class="feature-description">
+          Our violins use the shiniest brass which is sourced locally. This will
+          increase the longevity of your purchase.
+        </p>
+      </div>
+      <div class="feature">
+        <h2 class="feature-title">Fast Shipping</h2>
+        <p class="feature-description">
+          We make sure you recieve your violin as soon as we have finished making it. We also provide free returns if
           you are not satisfied.
-        </div>
-      </li>
-      <li>
-        <div class="feature">Quality Assurance</div>
-        <div>
+        </p>
+      </div>
+      <div class="feature">
+        <h2 class="feature-title">Quality Assurance</h2>
+        <p class="feature-description">
           For every purchase you make, we will ensure there are no damages or faults and we will check and test the
           pitch of your instrument.
+        </p>
+      </div>
+    </section>
+    <section class="how-it-works" id="how-it-works">
+      <iframe id="video" width="840" height="472.5" src="https://www.youtube.com/embed/uWSvoZiCz4w" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </section>
+    <section id="pricing" class="pricing">
+      <div class="items capped-width">
+        <div class="item">
+          <div class="item-name">Tenor Violin</div>
+          <div class="price">$600</div>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure, distinctio.</p>
+          <button class="select">Select</button>
         </div>
-      </li>
-    </ul>
-    <div id="how-it-works">
-      <iframe id="video" width="420" height="345" src="https://www.youtube.com/embed/y8Yv4pnO7qc">
-      </iframe>
-    </div>
-    <ul id="pricing">
-      <li>
-        <div class="item">Tenor Trombone</div>
-        <div class="price">$600</div>
-        <div>Lorem ipsum.</div>
-        <div>Lorem ipsum.</div>
-        <div>Lorem ipsum dolor.</div>
-        <div>Lorem ipsum.</div>
-        <button class="select">Select</button>
-      </li>
-      <li>
-        <div class="item">Bass Trombone</div>
-        <div class="price">$900</div>
-        <div>Lorem ipsum.</div>
-        <div>Lorem ipsum.</div>
-        <div>Lorem ipsum dolor.</div>
-        <div>Lorem ipsum.</div>
-        <button class="select">Select</button>
-      </li>
-      <li>
-        <div class="item">Valve Trombone</div>
-        <div class="price">$1200</div>
-        <div>Lorem ipsum.</div>
-        <div>Lorem ipsum.</div>
-        <div>Lorem ipsum dolor.</div>
-        <div>Lorem ipsum.</div>
-        <button class="select">Select</button>
-      </li>
-    </ul>
+        <div class="item">
+          <div class="item-name">Bass Violin</div>
+          <div class="price">$900</div>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure, distinctio.</p>
+          <button class="select">Select</button>
+        </div>
+        <div class="item">
+          <div class="item-name">Valve Violin</div>
+          <div class="price">$1200</div>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure, distinctio.</p>
+          <button class="select">Select</button>
+        </div>
+      </div>
+    </section>
   </main>
   <footer>
-    <ul>
-      <li><a href=>Privacy</a></li>
-      <li><a href="#">Terms</a></li>
-      <li><a href="#">Contact</a></li>
-    </ul>
-    <div>Copyright 2016, Original Trombones</div>
+    <div class="capped-width">
+      <ul class="nav-list">
+        <li><a href="#">Privacy</a></li>
+        <li><a href="#">Terms</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+      <p>Copyright 2016, Original Violins</p>
+    </div>
   </footer>
 </body>
 
