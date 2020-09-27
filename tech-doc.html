@@ -24,7 +24,7 @@
       <li><a href="#the_punch-line" class="nav-link">The Punch-Line</a></li>
     </ul>
   </nav>
-  <main id="main-doc">
+  <main id="main-doc" class="capped-width">
     <h1>OOP Versus Functional Decomposition</h1>
     <section class="main-section" id="introduction">
       <header>
@@ -46,7 +46,7 @@
     </section>
     <section class="main-section" id="the_basic_set-up">
       <header>
-        <h1>The Basic Set-Up</h1>
+        <h2>The Basic Set-Up</h2>
       </header>
       <p>
         The following problem is the canonical example of a common programming pattern, and, not coincidentally,
@@ -69,33 +69,34 @@
       <p>
         This problem leads to a conceptual <em>matrix</em> (two-dimensional grid) with one entry for each combination of
         variant and operation:
+        <table>
+          <tr>
+            <th>&nbsp;</th>
+            <th>eval</th>
+            <th>toString</th>
+            <th>hasZero</th>
+          </tr>
+          <tr>
+            <td>Int</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>Add</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>Negate</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+        </table>
       </p>
-      <table>
-        <tr>
-          <th>&nbsp;</th>
-          <th>eval</th>
-          <th>toString</th>
-          <th>hasZero</th>
-        </tr>
-        <tr>
-          <td>Int</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-        </tr>
-        <tr>
-          <td>Add</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-        </tr>
-        <tr>
-          <td>Negate</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-        </tr>
-      </table>
+      
       <p>
         No matter what programming language you use or how you approach solving this programming problem,
         you need to indicate what the proper behavior is for each entry in the grid. Certain approaches or languages
@@ -133,38 +134,34 @@
         This ML code shows the approach for our example: Notice how we deﬁne all the kinds of data in one place
         and then the nine entries in the table are implemented “by column” with one function for each column:
       </p>
-      <pre>
-        <code>
-          exception BadResult of string
-			   
-          datatype exp =
-             Int of int
-             | Negate of exp
-             | Add of exp * exp
-                    
-          fun eval e =
-              case e of
-                  Int _ => e
-                | Negate e1 => (case eval e1 of
-                                    Int i => Int (~i)
-                                  | _ => raise BadResult "non-int in negation")
-                | Add(e1,e2) => (case (eval e1, eval e2) of
-                                    (Int i, Int j) => Int (i+j)
-                                  | _ => raise BadResult "non-ints in addition")
+      <pre><code>exception BadResult of string
+
+datatype exp =
+    Int of int
+    | Negate of exp
+    | Add of exp * exp
+          
+fun eval e =
+    case e of
+        Int _ => e
+      | Negate e1 => (case eval e1 of
+                          Int i => Int (~i)
+                        | _ => raise BadResult "non-int in negation")
+      | Add(e1,e2) => (case (eval e1, eval e2) of
+                          (Int i, Int j) => Int (i+j)
+                        | _ => raise BadResult "non-ints in addition")
+        
+fun toString e =
+    case e of
+        Int i => Int.toString i
+      | Negate e1 => "-(" ^ (toString e1) ^ ")"
+      | Add(e1,e2) => "(" ^ (toString e1) ^ " + " ^ (toString e2) ^ ")"
                   
-          fun toString e =
-              case e of
-                  Int i => Int.toString i
-                | Negate e1 => "-(" ^ (toString e1) ^ ")"
-                | Add(e1,e2) => "(" ^ (toString e1) ^ " + " ^ (toString e2) ^ ")"
-                            
-          fun hasZero e =
-              case e of
-                  Int i => i=0
-                | Negate e1 => hasZero e1
-                | Add(e1,e2) => (hasZero e1) orelse (hasZero e2)
-        </code>
-      </pre>
+fun hasZero e =
+    case e of
+        Int i => i=0
+      | Negate e1 => hasZero e1
+      | Add(e1,e2) => (hasZero e1) orelse (hasZero e2)</code></pre>
     </section>
     <section class="main-section" id="the_object-oriented_approach">
       <header>
@@ -201,61 +198,57 @@
         methods that every subclass of <code>Exp</code> deﬁnes — listing all the operations in one place. Notice how we
         deﬁne the nine entries in the table “by row” with one class for each row.
       </p>
-      <pre>
-        <code>
-          class Exp
-          # could put default implementations or helper methods here
-          end
-          
-          class Int < Exp
-            attr_reader :i
-            def initialize i
-              @i = i
-            end
-            def eval
-              self
-            end
-            def toString
-              @i.to_s
-            end
-            def hasZero
-              i==0
-            end
-          end
-          
-          class Negate < Exp
-            attr_reader :e
-            def initialize e
-              @e = e
-            end
-            def eval
-              Int.new(-e.eval.i) # error if e.eval has no i method (not an Int)
-            end
-            def toString
-              "-(" + e.toString + ")"
-            end
-            def hasZero
-              e.hasZero
-            end
-          end
-          
-          class Add < Exp
-            attr_reader :e1, :e2
-            def initialize(e1,e2)
-              @e1 = e1
-              @e2 = e2
-            end
-            def eval
-              Int.new(e1.eval.i + e2.eval.i) # error if e1.eval or e2.eval have no i method
-            end
-            def toString
-              "(" + e1.toString + " + " + e2.toString + ")"
-            end
-            def hasZero
-              e1.hasZero || e2.hasZero
-            end
-        </code>
-      </pre>
+      <pre><code>class Exp
+# could put default implementations or helper methods here
+end
+
+class Int < Exp
+  attr_reader :i
+  def initialize i
+    @i = i
+  end
+  def eval
+    self
+  end
+  def toString
+    @i.to_s
+  end
+  def hasZero
+    i==0
+  end
+end
+
+class Negate < Exp
+  attr_reader :e
+  def initialize e
+    @e = e
+  end
+  def eval
+    Int.new(-e.eval.i) # error if e.eval has no i method (not an Int)
+  end
+  def toString
+    "-(" + e.toString + ")"
+  end
+  def hasZero
+    e.hasZero
+  end
+end
+
+class Add < Exp
+  attr_reader :e1, :e2
+  def initialize(e1,e2)
+    @e1 = e1
+    @e2 = e2
+  end
+  def eval
+    Int.new(e1.eval.i + e2.eval.i) # error if e1.eval or e2.eval have no i method
+  end
+  def toString
+    "(" + e1.toString + " + " + e2.toString + ")"
+  end
+  def hasZero
+    e1.hasZero || e2.hasZero
+  end</code></pre>
     </section>
     <section class="main-section" id="the_punch-line">
       <header>
@@ -285,6 +278,12 @@
         <code>MenuBar</code>, <code>TextBox</code>, <code>SliderBar</code>, etc.). The choice can also depend on what
         programming language you are using, how useful libraries are organized, etc.
       </p>
+    </section>
+    <section>
+      <header>
+        <h2>Reference</h2>
+      </header>
+      <p>All content taken from <em><a href="https://www.coursera.org/learn/programming-languages-part-c" target="_blank">Programming Languages, Part C</a></em> on Coursera.</p>
     </section>
   </main>
 </body>
