@@ -1,14 +1,4 @@
-html {
-    box-sizing: border-box;
-}
-
-*, *:before, *:after {
-    box-sizing: inherit;
-}
-
-body {
-    font-family: Calibri, Arial, Helvetica, sans-serif
-}
+@import url("common.css");
 
 section {
     min-height: 100vh;
@@ -16,11 +6,6 @@ section {
 
 p {
     line-height: 1.5em;
-}
-
-.capped-width {
-    max-width: 1200px;
-    margin: 0 auto;
 }
 
 a, input {
