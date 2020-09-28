@@ -13,88 +13,69 @@
   <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
 
   <main id='main'>
-    <h1 id='title'>Dr. Norman Borlaug</h1>
-    <div id='tribute-info'>The man who saved a billion lives. </div>
-    <figure id='img-div'>
-      <img id='image'
-            srcset="images/borlaug-400.jpg 400w,
-                    images/borlaug-800.jpg 800w"
-            sizes="(max-width: 400px) 100vw,
-                    800px"
-          src="images/borlaug-800.jpg"
-          alt='Picture of Norman Borlaug'>
-      <figcaption id='img-caption'>Dr. Norman Borlaug holding wheat.</figcaption>
-    </figure>
-    <section class="timeline">
-      <h3>Here's a timeline of Dr. Borlaug's life:</h3>
+    <div class="intro">
+      <h1 id='title'>Leonardo da Vinci</h1>
+      <p id='tribute-info'>Italian polymath of the High Renaissance </p>
+      <figure id='img-div'>
+        <img id='image' 
+                  srcset="images/davinci-400.jpg 400w,
+                          images/davinci-800.jpg 800w"
+                  sizes="(max-width: 400px) 100vw,
+                      800px" src="images/davinci-800.jpg" alt='Picture of Leonardo da Vinci'>
+        <figcaption id='img-caption'>Portrait of a Man in Red Chalk</figcaption>
+      </figure>
+    </div>
+    <div class="description">
+      <p>
+        Leonardo da Vinci was an Italian polymath of the High Renaissance who is widely considered one of the greatest
+        painters of all time (despite his few surviving works). The Mona Lisa is the most famous of Leonardo's works and
+        the most famous portrait ever made. The Last Supper is the most reproduced religious painting of all time and
+        his Vitruvian Man drawing is also regarded as a cultural icon. He is also known for his notebooks, in which he
+        made drawings and notes on science and invention; these involve a variety of subjects including anatomy,
+        cartography, painting, and palaeontology. Leonardo's collective works compose a contribution to later
+        generations of artists rivalled only by that of his contemporary Michelangelo.
+      </p>
+      <p>
+        Properly named Leonardo di ser Piero da Vinci, Leonardo was born out of wedlock to a notary, Piero da Vinci,
+        and a peasant woman, Caterina, in Vinci, in the region of Florence, Italy. Leonardo was educated in the studio
+        of the renowned Italian painter Andrea del Verrocchio. Much of his earlier working life was spent in the service
+        of Ludovico il Moro in Milan, and he later worked in Rome, Bologna and Venice. He spent his last three years in
+        France, where he died in 1519.
+      </p>
+      <p>
+        Although he had no formal academic training, many historians and scholars regard Leonardo as the prime
+        exemplar of the "Renaissance Man" or "Universal Genius", an individual of "unquenchable curiosity" and
+        "feverishly inventive imagination." He is widely considered one of the most diversely talented individuals
+        ever to have lived. According to art historian Helen Gardner, the scope and depth of his interests were
+        without precedent in recorded history, and "his mind and personality seem to us superhuman, while the man
+        himself mysterious and remote." Scholars interpret his view of the world as being based in logic, though the
+        empirical methods he used were unorthodox for his time.
+      </p>
+      <p>
+        Leonardo is revered for his technological ingenuity. He conceptualized flying machines, a type of armoured
+        fighting vehicle, concentrated solar power, an adding machine, and the double hull. Relatively few of his
+        designs were constructed or even feasible during his lifetime, as the modern scientific approaches to metallurgy
+        and engineering were only in their infancy during the Renaissance. Some of his smaller inventions, however,
+        entered the world of manufacturing unheralded, such as an automated bobbin winder and a machine for testing the
+        tensile strength of wire. He is also sometimes credited with the inventions of the parachute, helicopter, and
+        tank. He made substantial discoveries in anatomy, civil engineering, geology, optics, and hydrodynamics,
+        but he did not publish his findings and they had little to no direct influence on subsequent science.
+      </p>
+      <blockquote cite="http://www.gutenberg.org/files/29904/29904-h/29904-h.htm">
+        As a well spent day affords happy sleep, so does a life profitably employed afford a happy death.
+      </blockquote>
+    </div>
+
+    <footer class='tribute'>
       <ul>
-        <li>
-          <strong>1914</strong> - Born in Cresco, Iowa.
-        </li>
-        <li>
-          <strong>1933</strong> - Leaves his family's farm to attend the University of Minnesota, thanks to a Depression
-          era program known as the "National Youth Administration".
-        </li>
-        <li>
-          <strong>1935</strong> - Has to stop school and save up more money. Works in the Civilian Conservation Corps,
-          helping starving Americans. "I saw how food changed them", he said. "All of this left scars on me."
-        </li>
-        <li>
-          <strong>1937</strong> - Finishes university and takes a job in the US Forestry Service.
-        </li>
-        <li>
-          <strong>1938</strong> - Marries wife of 69 years Margret Gibson. Gets laid off due to budget cuts. Inspired by
-          Elvin Charles Stakman, he returns to school study under Stakman, who teaches him about breeding pest-resistent
-          plants.
-        </li>
-        <li>
-          <strong>1941</strong> - Tries to enroll in the military after the Pearl Harbor attack, but is rejected. Instead,
-          the military asked his lab to work on waterproof glue, DDT to control malaria, disinfectants, and other applied
-          science.
-        </li>
-        <li>
-          <strong>1942</strong> - Receives a Ph.D. in Genetics and Plant Pathology.
-        </li>
-        <li><strong>1944</strong> - Rejects a 100% salary increase from Dupont, leaves behind his pregnant wife, and flies
-          to Mexico to head a new plant pathology program. Over the next 16 years, his team breeds 6,000 different strains
-          of disease resistent wheat - including different varieties for each major climate on Earth.
-        </li>
-        <li>
-          <strong>1945</strong> - Discovers a way to grown wheat twice each season, doubling wheat yields.
-        </li>
-        <li>
-          <strong>1953</strong> - crosses a short, sturdy dwarf breed of wheat with a high-yeidling American breed,
-          creating a strain that responds well to fertilizer. It goes on to provide 95% of Mexico's wheat.
-        </li>
-        <li>
-          <strong>1962</strong> - Visits Delhi and brings his high-yielding strains of wheat to the Indian subcontinent in
-          time to help mitigate mass starvation due to a rapidly expanding population.
-        </li>
-        <li>
-          <strong>1970</strong> - receives the Nobel Peace Prize.
-        </li>
-        <li>
-          <strong>1983</strong> - helps seven African countries dramatically increase their maize and sorghum yields
-        </li>
-        <li>
-          <strong>2005</strong> - states "we will have to double the world food supply by 2050." Argues that genetically
-          modified crops are the only way we can meet the demand, as we run out of arable land. Says that GM crops are not
-          inherently dangerous because "we've been genetically modifying plants and animals for a long time. Long before
-          we called it science, people were selecting the best breeds."
-        </li>
-        <li>
-          <strong>2009</strong> - dies at the age of 95.
+        <li><a class='tribute-link' target='_blank'
+            href='https://en.wikipedia.org/wiki/List_of_works_by_Leonardo_da_Vinci'>Artworks</a></li>
+        <li><a class='tribute-link' id='tribute-link' target='_blank'
+            href='https://en.wikipedia.org/wiki/Leonardo_da_Vinci'>Wikipedia</a></li>
+        <li><a class='tribute-link' target='_blank' href='https://en.wikiquote.org/wiki/Leonardo_da_Vinci'>Quotes</a>
         </li>
       </ul>
-    </section>
-    
-    <section class='tribute'>
-      <ul>
-        <li><a class='tribute-link' target='_blank' href='https://www.nobelprize.org/prizes/peace/1970/borlaug/biographical/'>Nobel Prize</a></li>
-        <li><a class='tribute-link' id='tribute-link' target='_blank' href='https://en.wikipedia.org/wiki/Norman_Borlaug'>Wikipedia</a></li>
-        <li><a class='tribute-link' target='_blank' href='https://archives.lib.umn.edu/repositories/14/resources/1743'>Papers</a></li>
-      </ul>
-    </section>
+    </footer>
   </main>
 </body>
 

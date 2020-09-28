@@ -1,84 +1,121 @@
-@import url("common.css");
+/* || General styles */
+
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
 
 body {
-  background: darkgray url("images/bg-borlaug-dark.jpg") center/cover no-repeat;
+  font-family: Calibri, Arial, Helvetica, sans-serif;
+  background: darkgray url("images/bg-davinci.jpg") center/cover no-repeat;
   background-attachment: fixed;
 }
 
-h1 {
-  font-size: 3.5rem;
-  font-weight: lighter;
-  margin-top: 0.25em;
-  margin-bottom: 0.2em;
-}
-
-h3 {
-  font-size: 2rem;
-  font-weight: lighter;
-  padding-top: 1em;
-  padding-bottom: 1em;
-}
-
 main {
-  max-width: 700px;
+  max-width: 35em;
   margin: 0 auto;
   text-align: center;
   color: white;
 }
 
-img {
-  max-width: 100%;
-  height: auto;
-  margin: auto;
-  display: block;
-}
-
-figcaption {
-  padding-top: 0.5em;
+h1, figcaption, blockquote {
+  font-family: 'Goudy Old Style', 'Times New Roman', Times, serif;
 }
 
 a {
+  display: inline-block;
   min-height: 48px;
   min-width: 48px;
 }
 
-strong {
-  font-weight: bolder;
-}
 
-.timeline {
+/* || Intro */
+
+.intro {
   margin-top: 1em;
-  padding: 1em;
-  background-color: rgba(50, 50, 50, 0.65);
+  padding: 1em 0 2em;
+  background-color: rgba(80, 40, 0, 0.65);
 }
 
-.timeline ul {
-  text-align: left;
-  line-height: 1.8em;
+h1 {
+  font-size: 2rem;
+  font-style: italic;
+  font-weight: lighter;
+  margin-bottom: 0.2em;
 }
 
-.timeline ul li {
-  padding-bottom: 1em;
+@media screen and (min-width: 20em) {
+  h1 {
+    font-size: 3.5rem;
+  }
 }
 
-#tribute-info {
-  padding-bottom: 2em;
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin-top: 2em;
 }
+
+figure {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+figcaption {
+  font-style: italic;
+  padding: 0.5em 0;
+  background-color: rgb(56, 0, 0);
+  width: auto;
+}
+
+
+/* || Description */
+
+.description {
+  line-height: 1.6;
+  margin-top: 1em;
+  padding: 2em;
+  background-color: rgba(30, 0, 0, 0.65);
+  text-align: justify;
+}
+
+.description p {
+  margin-bottom: 1.5em;
+}
+
+blockquote {
+  font-style: italic;
+  padding-left: 10px;
+  border-left: 3px solid rgb(120, 80, 0);
+  margin: 4em .5em 0;
+}
+
+@media screen and (min-width: 25em) {
+  blockquote {
+    margin: 4em 3em 0;
+  }
+}
+
+
+/* || Tribute (links) */
 
 .tribute ul {
   display: flex;
   justify-content: center;
-  margin: 3em auto 1em;
+  margin: 3em 0 1em;
 }
 
-@media screen and (max-width: 540px) {
+@media screen and (max-width: 22em) {
   .tribute ul {
     display: flex;
     flex-direction: column;
     justify-content: center;
     margin: 3em auto 1em;
   }
-
   .tribute li {
     margin-bottom: .5em;
   }
@@ -88,14 +125,13 @@ a.tribute-link {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  width: 100px;
-  padding: .5em;
+  width: 6em; 
   margin: 0 .5em 0;
-  background-color: black;
+  background-color: rgb(50, 0, 0);
   color: white;
   text-decoration: none;
 }
 
 a.tribute-link:hover {
-  background-color: gray;
+  background-color: rgb(120, 80, 0);
 }
