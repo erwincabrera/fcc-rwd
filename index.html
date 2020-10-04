@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Design</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+    <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+    <header>
+        <nav id="navbar">
+            <ul class="nav-list">
+                <li><a href="#welcome-section">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section id="welcome-section" class="welcome-section">
+        <p>This is a hobby website that I created while learning about web design.
+            All of the pages are coded in HTML and CSS; no front-end libraries or frameworks were used.
+        </p>
+    </section>
+    <section id="projects" class="projects">
+        <div class="project-display">
+            <div class="project-tile">
+                <a href="tribute-page.html" target="_blank">
+                    <img 
+                        srcset="images/tribute-page-thumbnail-small.jpg 256w,
+                                images/tribute-page-thumbnail-large.jpg 512w",
+                        sizes="(max-width: 256px) 100vw,
+                                512px"
+                        src="images/tribute-page-thumbnail-small.jpg" alt="Tribute Page preview">
+                    <h2 class='project-title'>Tribute Page</h2>
+                </a>
+            </div>
+            <div class="project-tile">
+                <a href="survey-form.html" target="_blank">
+                    <img 
+                        srcset="images/survey-form-thumbnail-small.jpg 256w,
+                                images/survey-form-thumbnail-large.jpg 512w",
+                        sizes="(max-width: 256px) 100vw,
+                                512px"
+                        src="images/survey-form-thumbnail-small.jpg" alt="Survey Form Page preview">
+                    <h2 class='project-title'>Survey Form</h2>
+                </a>
+            </div>
+            <div class="project-tile">
+                <a href="product-landing.html" target="_blank">
+                    <img 
+                        srcset="images/product-landing-thumbnail-small.jpg 256w,
+                                images/product-landing-thumbnail-large.jpg 512w",
+                        sizes="(max-width: 256px) 100vw,
+                                512px"
+                        src="images/product-landing-thumbnail-small.jpg" alt="Product Landing Page preview">
+                    <h2 class='project-title'>Product Landing Page</h2>
+                </a>
+            </div>
+            <div class="project-tile">
+                <a href="tech-doc.html" target="_blank">
+                    <img 
+                        srcset="images/technical-documentation-thumbnail-small.jpg 256w,
+                                images/technical-documentation-thumbnail-large.jpg 512w",
+                        sizes="(max-width: 256px) 100vw,
+                                512px"
+                        src="images/technical-documentation-thumbnail-small.jpg" alt="Technical Documentation Page preview">
+                    <h2 class='project-title'>Technical Documentation</h2>
+                </a>
+            </div>
+        </div>
+    </section>
+    <section id="contact" class="contact">
+        <a id="profile-link" href="https://github.com/erwincabrera" target="_blank">
+            <img src="images/GitHub-Mark-Light-32px.png" alt="GitHub">
+        </a>
+    </section>
+</body>
+
+</html>

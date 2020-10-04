@@ -1,0 +1,20 @@
+html {
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+body {
+    font-family: Calibri, Arial, Helvetica, sans-serif;
+}
+
+.capped-width {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.linelength {
+    background-color: yellow;
+}
